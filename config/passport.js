@@ -2,7 +2,7 @@ var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy; //It's requiring the passport for our local database authentication.
 var FacebookStrategy = require('passport-facebook').Strategy; //It's requiring the passport for our local database authentication.
 var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;; //It's requiring the passport for our local database authentication.
-var LinkedInStrategy = require('passport-linkedin-oauth2').Strategy;
+// var LinkedInStrategy = require('passport-linkedin-oauth2').Strategy;
 var mongoose = require('mongoose');
 var User = mongoose.model('User');
 function moduleAvailable(name) {
@@ -73,64 +73,64 @@ passport.use(new LocalStrategy(function(username, password, done) { //This passw
 //   return picUrl;
 // }
 
-passport.use(new LinkedInStrategy({
-  clientID: env.linkedin.CLIENTID || process.env['linkedin.CLIENTID'],
-  clientSecret: env.linkedin.SECRET || process.env['linkedin.SECRET'],
-  callbackURL: "http://127.0.0.1:3000/api/user/auth/linkedin/callback", 
-  scope: ['r_emailaddress', 'r_basicprofile'],
-  state: true,
-  passReqToCallback: true
-}, function(req, accessToken, refreshToken, profile, done) {
-  // asynchronous verification, for effect...
-  process.nextTick(function () {
-    // To keep the example simple, the user's LinkedIn profile is returned to
-    // represent the logged-in user. In a typical application, you would want
-    // to associate the LinkedIn account with a user record in your database,
-    // and return that user instead.
-    User.findOne({
-      'linkedInId': profile.id
-    }, function(err, user) {
-        // console.log("DEBUG: Contents of profile:") ;
-        if (err) {
-          console.log('DEBUG: Error connecting');
-          return done(err);
-        }
-        if (user) {
-          console.log('DEBUG: Current user');
-          // console.log('user', req.body)
-          req.tempUser  = user;
-          return done(null, user);
-        }
-        // Else no user is found. We need to create a new user.
-        else {
+// passport.use(new LinkedInStrategy({
+//   clientID: env.linkedin.CLIENTID || process.env['linkedin.CLIENTID'],
+//   clientSecret: env.linkedin.SECRET || process.env['linkedin.SECRET'],
+//   callbackURL: "http://127.0.0.1:3000/api/user/auth/linkedin/callback", 
+//   scope: ['r_emailaddress', 'r_basicprofile'],
+//   state: true,
+//   passReqToCallback: true
+// }, function(req, accessToken, refreshToken, profile, done) {
+//   // asynchronous verification, for effect...
+//   process.nextTick(function () {
+//     // To keep the example simple, the user's LinkedIn profile is returned to
+//     // represent the logged-in user. In a typical application, you would want
+//     // to associate the LinkedIn account with a user record in your database,
+//     // and return that user instead.
+//     User.findOne({
+//       'linkedInId': profile.id
+//     }, function(err, user) {
+//         // console.log("DEBUG: Contents of profile:") ;
+//         if (err) {
+//           console.log('DEBUG: Error connecting');
+//           return done(err);
+//         }
+//         if (user) {
+//           console.log('DEBUG: Current user');
+//           // console.log('user', req.body)
+//           req.tempUser  = user;
+//           return done(null, user);
+//         }
+//         // Else no user is found. We need to create a new user.
+//         else {
 
-          var newUser = new User();
-          newUser.linkedInId = profile.id;
-          // According to the Google API, the name is in
-          // displayName
-          newUser.username = profile.displayName;
+//           var newUser = new User();
+//           newUser.linkedInId = profile.id;
+//           // According to the Google API, the name is in
+//           // displayName
+//           newUser.username = profile.displayName;
 
-          newUser.email = profile.emails ? profile.emails[0].value : null;
+//           newUser.email = profile.emails ? profile.emails[0].value : null;
 
-          // Photo
-          // newUser.image = generateLinkedInPhotoUrl(profile.photos[0].value, 500);;
-          newUser.image = profile.photos[0].value, 500;
+//           // Photo
+//           // newUser.image = generateLinkedInPhotoUrl(profile.photos[0].value, 500);;
+//           newUser.image = profile.photos[0].value, 500;
 
-          // Created stores date created in the database.
-          newUser.createdDate = new Date();
+//           // Created stores date created in the database.
+//           newUser.createdDate = new Date();
 
-          // Save the newUser to the database.
-          newUser.save(function(err) {
-            if (err)
-              throw err;
-            // Otherwise return done, no error and newUser.
-            req.tempUser = newUser;
-            return done(null, newUser);
-          })
-        }
-      });
-});
-}));
+//           // Save the newUser to the database.
+//           newUser.save(function(err) {
+//             if (err)
+//               throw err;
+//             // Otherwise return done, no error and newUser.
+//             req.tempUser = newUser;
+//             return done(null, newUser);
+//           })
+//         }
+//       });
+// });
+// }));
 
 // Generates url for Facebook photo of size height x width====================================
 function generateFacebookPhotoUrl(id, accessToken, height, width) {

@@ -4,9 +4,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <head>
-	<title>RegiKnow</title>
+	<title>Kodaki</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="icon" type="image/png" href="imgs/regiknowLogo.png">
+	<link rel="icon" type="image/png" href=""> 
 	<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/0.9.4/angular-material.min.css">
 	<link rel="stylesheet" href="https://storage.googleapis.com/code.getmdl.io/1.0.5/material.indigo-pink.min.css">
 	<script src="https://storage.googleapis.com/code.getmdl.io/1.0.5/material.min.js"></script>
@@ -26,7 +26,7 @@
 
 			<div class="col-md-11">
 
-				<i ng-click="nav.toggleLeft()" id="naviBars" class="fa fa-bars mdl-button mdl-js-button mdl-js-ripple-effect" style="font-size: 2.6em;"><span id="titleOnNav">&nbsp;&nbsp;Regiknow</span>
+				<i ng-click="nav.toggleLeft()" id="naviBars" class="fa fa-bars mdl-button mdl-js-button mdl-js-ripple-effect" style="font-size: 2.6em;"><span id="titleOnNav">&nbsp;&nbsp;Kodaki</span>
 				</i>
 
 
@@ -82,24 +82,24 @@
 
 						<table id="sideNavPoints">
 							<tr>
-								<td><p>General Points<br>{{nav.status._user.generalPoints}}</p></td>
-								<td><p>Knowledge Points<br>{{nav.status._user.knowledgePoints}}</p></td>
+								<td>Information</td>
+								<td>Information</td>
 							</tr>
 						</table>
 
 						<img class="img  img-circle navImage" style="width: 40%;" ng-src="{{nav.status._user.image}}">
 
-					</div>
+				</div>
 				</center>
 			</a>
 
 		</md-toolbar>
 		<br><br>
 		<a class="md-button" ng-show="nav.status._user" ui-sref="QuestionsFeed" ng-click="nav.close()">
-			<i class="material-icons">home</i>View Questions
+			<i class="material-icons">home</i>Home
 		</a>
 
-		<a class="md-button" ng-show="nav.status._user" ui-sref="CreateQuestion" ng-click="nav.close()">
+		<!-- <a class="md-button" ng-show="nav.status._user" ui-sref="CreateQuestion" ng-click="nav.close()">
 			<i class="material-icons">help_outline</i>
 			New Question
 		</a>
@@ -107,7 +107,7 @@
 		<a class="md-button" ng-show="nav.status._user" ui-sref="Rank({id: nav.status._user.id})" ng-click="nav.close()">
 			<i class="material-icons">swap_vert</i>
 			Rank
-		</a>
+		</a> -->
 
 		<a class="md-button" ng-show="nav.status._user" ui-sref="Settings({id: nav.status._user.id})" ng-click="nav.close()">
 			<i class="material-icons">settings</i>Settings
